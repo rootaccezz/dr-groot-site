@@ -1,0 +1,396 @@
+/* ======================================================== */
+/* DR. GROOT INTERACTIVE SCALP & HAIR SOLUTION FINDER CSS */
+/* ======================================================== */
+
+.groot-quiz-section {
+  background-color: var(--global-palette8, #f7fafc); /* Light homepage background */
+  padding: 80px 20px;
+  font-family: var(--global-body-font-family, 'Inter', sans-serif);
+  color: var(--global-palette4, #2d3748);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.groot-quiz-container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+/* --- TITLE STYLING --- */
+.groot-quiz-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.groot-quiz-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--global-palette3, #1a202c);
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.groot-quiz-header h2 span {
+  color: var(--global-palette14, #f7630c); /* Brand Orange/Gold highlight */
+}
+
+.groot-quiz-divider {
+  width: 80px;
+  height: 4px;
+  background-color: var(--global-palette15, #f5a524); /* Accent Gold */
+  margin: 15px auto 0 auto;
+  border-radius: 2px;
+}
+
+.groot-quiz-header p {
+  font-size: 16px;
+  color: var(--global-palette5, #4a5568);
+  max-width: 600px;
+  margin: 15px auto 0 auto;
+  line-height: 1.6;
+}
+
+/* --- STEPPER PROGRESS BAR --- */
+.groot-quiz-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  position: relative;
+}
+
+.groot-quiz-stepper::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--global-palette7, #edf2f7);
+  z-index: 1;
+  transform: translateY(-50%);
+}
+
+.groot-quiz-progress-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 2px;
+  background-color: var(--global-palette15, #f5a524);
+  z-index: 1;
+  transform: translateY(-50%);
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+.groot-quiz-step-node {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--global-palette9, #ffffff);
+  border: 2px solid var(--global-palette7, #edf2f7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--global-palette6, #718096);
+  z-index: 2;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.groot-quiz-step-node.active {
+  border-color: var(--global-palette15, #f5a524);
+  color: var(--global-palette3, #1a202c);
+  box-shadow: 0 0 12px rgba(245, 165, 36, 0.25);
+  font-weight: 700;
+}
+
+.groot-quiz-step-node.completed {
+  background-color: var(--global-palette15, #f5a524);
+  border-color: var(--global-palette15, #f5a524);
+  color: var(--global-palette9, #ffffff);
+}
+
+/* --- CARD WRAPPER --- */
+.groot-quiz-card {
+  background-color: var(--global-palette9, #ffffff);
+  border: 1px solid var(--global-palette7, #edf2f7);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* --- STEP TRANSITIONS --- */
+.quiz-step-pane {
+  display: none;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.quiz-step-pane.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quiz-step-pane.fade-out {
+  opacity: 0;
+  transform: translateY(-15px);
+}
+
+.quiz-step-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: var(--global-palette3, #1a202c);
+  line-height: 1.4;
+  font-family: var(--global-body-font-family, sans-serif);
+}
+
+/* --- OPTIONS STYLING --- */
+.groot-quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.groot-quiz-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.groot-quiz-option {
+  background-color: var(--global-palette9, #ffffff);
+  border: 1px solid var(--global-palette7, #edf2f7);
+  border-radius: 12px;
+  padding: 22px 26px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.groot-quiz-option:hover {
+  border-color: var(--global-palette15, #f5a524);
+  background-color: rgba(245, 165, 36, 0.02);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.groot-quiz-option.selected {
+  border-color: var(--global-palette15, #f5a524);
+  background-color: rgba(245, 165, 36, 0.04);
+  box-shadow: 0 0 0 2px var(--global-palette15, #f5a524);
+}
+
+.groot-quiz-option h4 {
+  font-family: var(--global-body-font-family, 'Inter', sans-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--global-palette3, #1a202c);
+  margin: 0 0 6px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.groot-quiz-option p {
+  font-size: 14px;
+  color: var(--global-palette5, #4a5568);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* --- RESULT CARD VIEW --- */
+.groot-result-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.groot-result-image-container {
+  background-color: var(--global-palette9, #ffffff);
+  border: 1px solid var(--global-palette7, #edf2f7);
+  border-radius: 16px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.01);
+  height: 320px;
+  overflow: hidden;
+}
+
+.groot-result-image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.groot-result-image-container:hover img {
+  transform: scale(1.05);
+}
+
+.groot-result-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.groot-result-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--global-palette14, #f7630c);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.groot-result-details h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--global-palette3, #1a202c);
+  margin: 0 0 16px 0;
+  line-height: 1.25;
+}
+
+.groot-result-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.groot-result-features li {
+  font-size: 15px;
+  color: var(--global-palette4, #2d3748);
+  line-height: 1.5;
+  position: relative;
+  padding-left: 28px;
+}
+
+.groot-result-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--global-palette14, #f7630c);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.groot-result-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.groot-btn-buy {
+  background-color: var(--global-palette15, #f5a524);
+  color: var(--global-palette3, #1a202c) !important;
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 14px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(245, 165, 36, 0.2);
+}
+
+.groot-btn-buy:hover {
+  background-color: var(--global-palette10, #3182ce); /* fallback or custom blue hover matches TOC */
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(49, 130, 206, 0.3);
+}
+
+.groot-btn-reset {
+  background-color: transparent;
+  color: var(--global-palette4, #2d3748) !important;
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 14px 32px;
+  border-radius: 8px;
+  border: 1px solid var(--global-palette6, #718096);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.groot-btn-reset:hover {
+  background-color: var(--global-palette7, #edf2f7);
+  border-color: var(--global-palette5, #4a5568);
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 850px) {
+  .groot-result-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .groot-result-image-container {
+    height: 260px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .groot-quiz-header h2 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 650px) {
+  .groot-quiz-options-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .groot-quiz-card {
+    padding: 24px;
+  }
+
+  .groot-result-actions {
+    flex-direction: column;
+  }
+
+  .groot-btn-buy, .groot-btn-reset {
+    width: 100%;
+    text-align: center;
+  }
+}
